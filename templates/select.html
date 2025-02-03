@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number System Converter</title>
+    <link rel="stylesheet" href="{% static 'select.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Number System Converter</h1>
+        
+        <div class="form-section">
+            <form id="convertForm" method="POST" action="numbers">
+                {% csrf_token %}
+                
+                <label for="number-system-1"><b>From:</b></label>
+                <select id="number-system-1" name="number-system-1">
+                    <option value="decimal">Decimal</option>
+                    <option value="binary">Binary</option>
+                    <option value="hexadecimal">Hexadecimal</option>
+                    <option value="octal">Octal</option>
+                </select>
+
+                <label for="number-system-2"><b>To:</b></label>
+                <select id="number-system-2" name="number-system-2">
+                    <option value="binary">Binary</option>
+                    <option value="decimal">Decimal</option>
+                    <option value="hexadecimal">Hexadecimal</option>
+                    <option value="octal">Octal</option>
+                </select>
+
+                <label for="value"><b>Enter Number:</b></label>
+                <input type="text" id="value" name="value" required>
+
+                <button type="submit" class="convert-btn">Convert</button>
+                <button type="reset" class="reset-btn">Reset</button>
+            </form>
+        </div>
+
+        <div class="result-section">
+            <h2>Result:</h2>
+            <p >{{ number }}</p>
+        </div>
+
+        <div class="info-section">
+            <h2>How to Convert Numbers</h2>
+            <p>
+                - Enter a number in the input field.<br>
+                - Select the original number system from the dropdown.<br>
+                - Select the desired conversion system.<br>
+                - Click "Convert" to get the result.<br>
+            </p>
+        </div>
+    </div>
+
+       <!-- Explanation Section -->
+        {% if number %}
+        <div class="explanation-section">
+            {% if from_system == "decimal" and to_system == "binary" %}
+                <h2>Decimal to Binary Conversion</h2>
+                <p>Divide the number by 2 and record the remainder.</p>
+                <h2>Decimal</h2>
+                <p>Decimal number is a number expressed in the base 10 numeral system. Decimal number's digits have 10 symbols: 0,1,2,3,4,5,6,7,8,9. Each digit of a decimal number counts a power of 10.<br><br>
+                   Decimal number example:
+                     653<sub>10</sub> = 6×10<sup>2</sup>+5×10<sup>1</sup>+3×10<sup>0</sup>
+                </p><br>
+                <h2>Binary</h2>
+                <p>Binary number is a number expressed in the base 2 numeral system. Binary number's digits have 2 symbols: zero (0) and one (1). Each digit of a binary number counts a power of 2.<br><br>
+                    Binary number example:
+                    1101<sub>2</sub> = 1×2<sup>3</sup>+1×2<sup>2</sup>+0×2<sup>1</sup>+1×2<sup>0</sup>= 1310</p><br><br><br>
+                <h3>Example: Convert 25 to Binary</h3>
+                <table>
+                    <tr><th>Decimal</th><th>Divided by</th><th>Quotient</th><th>Remainder</th></tr>
+                    <tr><td>25</td><td>2</td><td>12</td><td>1</td></tr>
+                    <tr><td>12</td><td>2</td><td>6</td><td>0</td></tr>
+                    <tr><td>6</td><td>2</td><td>3</td><td>0</td></tr>
+                    <tr><td>3</td><td>2</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>2</td><td>0</td><td>1</td></tr>
+                </table>
+                <p>Final Binary: <b>11001</b></p>
+
+            {% elif from_system == "decimal" and to_system == "octal" %}
+                <h2>Decimal to Octal Conversion</h2>
+                <h2>Decimal</h2>
+                <p>Decimal number is a number expressed in the base 10 numeral system. Decimal number's digits have 10 symbols: 0,1,2,3,4,5,6,7,8,9. Each digit of a decimal number counts a power of 10.<br><br>
+                   Decimal number example:
+                     653<sub>10</sub> = 6×10<sup>2</sup>+5×10<sup>1</sup>+3×10<sup>0</sup></p><br>
+                <h2>Octal</h2>
+                <p>Octal number is a number expressed in the base 8 numeral system. Octal number's digits have 8 symbols: 0,1,2,3,4,5,6,7. Each digit of an octal number counts a power of 16.<br><br>
+                    Octal number example:
+                    628<sub>8</sub> = 6×8<sup>2</sup>+2×8<sup>1</sup>+7×8<sup>0</sup></p>
+                <h3>Example: Convert 58 to Octal</h3>
+                <table>
+                    <tr><th>Decimal</th><th>Divided by</th><th>Quotient</th><th>Remainder</th></tr>
+                    <tr><td>58</td><td>8</td><td>7</td><td>2</td></tr>
+                    <tr><td>7</td><td>8</td><td>0</td><td>7</td></tr>
+                </table>
+                <p>Final Octal: <b>72</b></p>
+
+            {% elif from_system == "decimal" and to_system == "hexadecimal" %}
+                <h2>Decimal to Hexadecimal Conversion</h2>
+                <h2>Decimal</h2>
+                <p>Decimal number is a number expressed in the base 10 numeral system. Decimal number's digits have 10 symbols: 0,1,2,3,4,5,6,7,8,9. Each digit of a decimal number counts a power of 10.<br><br>
+                   Decimal number example:
+                     653<sub>10</sub> = 6×10<sup>2</sup>+5×10<sup>1</sup>+3×10<sup>0</sup></p><br>
+                <h2>Hexadecimal</h2>
+                <p>Hexadecimal number is a number expressed in the base 16 numeral system. Hexadecimal number's digits have 16 symbols: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Each digit of a hexadecimal number counts a power of 16.<br><br>
+                    Hexadecimal number example:
+                    62C<sub>16</sub> = 6×16<sup>2</sup>+2×16<sup>1</sup>+12×16<sup>0</sup></p>
+                <h3>Example: Convert 255 to Hexadecimal</h3>
+                <table>
+                    <tr><th>Decimal</th><th>Divided by</th><th>Quotient</th><th>Remainder (Hex)</th></tr>
+                    <tr><td>255</td><td>16</td><td>15</td><td>F</td></tr>
+                    <tr><td>15</td><td>16</td><td>0</td><td>F</td></tr>
+                </table>
+                <p>Final Hexadecimal: <b>FF</b></p>
+
+            {% elif from_system == "binary" and to_system == "decimal" %}
+                <h2>Binary to Decimal Conversion</h2>
+                <h2>Binary</h2>
+                <p>Binary number is a number expressed in the base 2 numeral system. Binary number's digits have 2 symbols: zero (0) and one (1). Each digit of a binary number counts a power of 2.<br><br>
+                    Binary number example:
+                    1101<sub>2</sub> = 1×2<sup>3</sup>+1×2<sup>2</sup>+0×2<sup>1</sup>+1×2<sup>0</sup>= 1310</p><br>
+                <h2>Decimal</h2>
+                <p>Decimal number is a number expressed in the base 10 numeral system. Decimal number's digits have 10 symbols: 0,1,2,3,4,5,6,7,8,9. Each digit of a decimal number counts a power of 10.<br><br>
+                   Decimal number example:
+                     653<sub>10</sub> = 6×10<sup>2</sup>+5×10<sup>1</sup>+3×10<sup>0</sup></p><br>
+                <h3>Example: Convert 1101 to Decimal</h3>
+                <table>
+                    <tr><th>Binary</th><th>Power of 2</th><th>Value</th></tr>
+                    <tr><td>1</td><td>2³ (8)</td><td>8</td></tr>
+                    <tr><td>1</td><td>2² (4)</td><td>4</td></tr>
+                    <tr><td>0</td><td>2¹ (2)</td><td>0</td></tr>
+                    <tr><td>1</td><td>2⁰ (1)</td><td>1</td></tr>
+                </table>
+                <p>Final Decimal: <b>13</b></p>
+
+            {% elif from_system == "binary" and to_system == "octal" %}
+                <h2>Binary to Octal Conversion</h2>
+                <h2>Binary</h2>
+                <p>Binary number is a number expressed in the base 2 numeral system. Binary number's digits have 2 symbols: zero (0) and one (1). Each digit of a binary number counts a power of 2.<br><br>
+                    Binary number example:
+                    1101<sub>2</sub> = 1×2<sup>3</sup>+1×2<sup>2</sup>+0×2<sup>1</sup>+1×2<sup>0</sup>= 1310</p><br>
+                    <h2>Octal</h2>
+                <p>Octal number is a number expressed in the base 8 numeral system. Octal number's digits have 8 symbols: 0,1,2,3,4,5,6,7. Each digit of an octal number counts a power of 16.<br><br>
+                    Octal number example:
+                    6278 = 6×82+2×81+7×80 = 158010</p>
+                    628<sub>8</sub> = 6×8<sup>2</sup>+2×8<sup>1</sup>+7×8<sup>0</sup></p>
+                    <h3>Example: Convert 110101 to Octal</h3>
+                <p>Group digits in sets of 3 from right: (110)(101)</p>
+                <table>
+                    <tr><th>Binary</th><th>Octal Equivalent</th></tr>
+                    <tr><td>110</td><td>6</td></tr>
+                    <tr><td>101</td><td>5</td></tr>
+                </table>
+                <p>Final Octal: <b>65</b></p>
+
+            {% elif from_system == "binary" and to_system == "hexadecimal" %}
+                <h2>Binary to Hexadecimal Conversion</h2>
+                <h2>Binary</h2>
+                <p>Binary number is a number expressed in the base 2 numeral system. Binary number's digits have 2 symbols: zero (0) and one (1). Each digit of a binary number counts a power of 2.<br><br>
+                    Binary number example:
+                    1101<sub>2</sub> = 1×2<sup>3</sup>+1×2<sup>2</sup>+0×2<sup>1</sup>+1×2<sup>0</sup>= 1310</p><br>
+                <h2>Hexadecimal</h2>
+                <p>Hexadecimal number is a number expressed in the base 16 numeral system. Hexadecimal number's digits have 16 symbols: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Each digit of a hexadecimal number counts a power of 16.<br><br>
+                    Hexadecimal number example:
+                    62C<sub>16</sub> = 6×16<sup>2</sup>+2×16<sup>1</sup>+12×16<sup>0</sup></p>
+                <h3>Example: Convert 11010110 to Hexadecimal</h3>
+                <p>Group digits in sets of 4: (1101)(0110) = <b>D6</b> (Hexadecimal)</p>
+
+            {% elif from_system == "octal" and to_system == "decimal" %}
+                <h2>Octal to Decimal Conversion</h2>
+                <h2>Octal</h2>
+                <p>Octal number is a number expressed in the base 8 numeral system. Octal number's digits have 8 symbols: 0,1,2,3,4,5,6,7. Each digit of an octal number counts a power of 16.<br><br>
+                    Octal number example: 
+                    628<sub>8</sub> = 6×8<sup>2</sup>+2×8<sup>1</sup>+7×8<sup>0</sup></p>
+                <h2>Decimal</h2>
+                <p>Decimal number is a number expressed in the base 10 numeral system. Decimal number's digits have 10 symbols: 0,1,2,3,4,5,6,7,8,9. Each digit of a decimal number counts a power of 10.<br><br>
+                    Decimal number example:
+                    653<sub>10</sub> = 6×10<sup>2</sup>+5×10<sup>1</sup>+3×10<sup>0</sup></p><br>
+                <h3>Example: Convert 345 to Decimal</h3>
+                <table>
+                    <tr><th>Octal</th><th>Power of 8</th><th>Value</th></tr>
+                    <tr><td>3</td><td>8² (64)</td><td>192</td></tr>
+                    <tr><td>4</td><td>8¹ (8)</td><td>32</td></tr>
+                    <tr><td>5</td><td>8⁰ (1)</td><td>5</td></tr>
+                </table>
+                <p>Final Decimal: <b>229</b></p>
+
+            {% elif from_system == "octal" and to_system == "binary" %}
+                <h2>Octal to Binary Conversion</h2>
+                <h2>Octal</h2>
+                <p>Octal number is a number expressed in the base 8 numeral system. Octal number's digits have 8 symbols: 0,1,2,3,4,5,6,7. Each digit of an octal number counts a power of 16.<br><br>
+                    Octal number example:                    
+                    628<sub>8</sub> = 6×8<sup>2</sup>+2×8<sup>1</sup>+7×8<sup>0</sup></p>
+                <h2>Binary</h2>
+                <p>Binary number is a number expressed in the base 2 numeral system. Binary number's digits have 2 symbols: zero (0) and one (1). Each digit of a binary number counts a power of 2.<br><br>
+                    Binary number example:
+                    1101<sub>2</sub> = 1×2<sup>3</sup>+1×2<sup>2</sup>+0×2<sup>1</sup>+1×2<sup>0</sup>= 1310</p><br>
+                <h3>Example: Convert 57 to Binary</h3>
+                <p>Convert each octal digit: (5 → 101), (7 → 111) → <b>101111</b></p>
+
+            {% elif from_system == "octal" and to_system == "hexadecimal" %}
+                <h2>Octal to Hexadecimal Conversion</h2>
+                <h2>Octal</h2>
+                <p>Octal number is a number expressed in the base 8 numeral system. Octal number's digits have 8 symbols: 0,1,2,3,4,5,6,7. Each digit of an octal number counts a power of 16.<br><br>
+                    Octal number example:                    
+                    628<sub>8</sub> = 6×8<sup>2</sup>+2×8<sup>1</sup>+7×8<sup>0</sup></p>
+                <h2>Hexadecimal</h2>
+                <h2>Hexadecimal</h2>
+                <p>Hexadecimal number is a number expressed in the base 16 numeral system. Hexadecimal number's digits have 16 symbols: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Each digit of a hexadecimal number counts a power of 16.<br><br>
+                    Hexadecimal number example:
+                    62C<sub>16</sub> = 6×16<sup>2</sup>+2×16<sup>1</sup>+12×16<sup>0</sup></p>
+                    <h3>Example: Convert 157 to Hexadecimal</h3>
+                <p>Convert to binary first: 157 → 001 101 111 → 0x37 (Hexadecimal)</p>
+
+            {% elif from_system == "hexadecimal" and to_system == "decimal" %}
+                <h2>Hexadecimal to Decimal Conversion</h2>
+                <h2>Hexadecimal</h2>
+                <p>Hexadecimal number is a number expressed in the base 16 numeral system. Hexadecimal number's digits have 16 symbols: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Each digit of a hexadecimal number counts a power of 16.<br><br>
+                    Hexadecimal number example:
+                    62C<sub>16</sub> = 6×16<sup>2</sup>+2×16<sup>1</sup>+12×16<sup>0</sup></p>
+                <h2>Decimal</h2>
+                <p>Decimal number is a number expressed in the base 10 numeral system. Decimal number's digits have 10 symbols: 0,1,2,3,4,5,6,7,8,9. Each digit of a decimal number counts a power of 10.<br><br>
+                   Decimal number example:
+                     653<sub>10</sub> = 6×10<sup>2</sup>+5×10<sup>1</sup>+3×10<sup>0</sup></p><br>
+                <h3>Example: Convert 2F to Decimal</h3>
+                <table>
+                    <tr><th>Hexadecimal</th><th>Power of 16</th><th>Value</th></tr>
+                    <tr><td>2</td><td>16¹ (16)</td><td>32</td></tr>
+                    <tr><td>F (15)</td><td>16⁰ (1)</td><td>15</td></tr>
+                </table>
+                <p>Final Decimal: <b>47</b></p>
+
+            {% elif from_system == "hexadecimal" and to_system == "binary" %}
+                <h2>Hexadecimal to Binary Conversion</h2>
+                <h2>Hexadecimal</h2>
+                <p>Hexadecimal number is a number expressed in the base 16 numeral system. Hexadecimal number's digits have 16 symbols: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Each digit of a hexadecimal number counts a power of 16.<br><br>
+                    Hexadecimal number example:
+                    62C<sub>16</sub> = 6×16<sup>2</sup>+2×16<sup>1</sup>+12×16<sup>0</sup></p>
+                <h2>Binary</h2>
+                <p>Binary number is a number expressed in the base 2 numeral system. Binary number's digits have 2 symbols: zero (0) and one (1). Each digit of a binary number counts a power of 2.<br><br>
+                    Binary number example:
+                    1101<sub>2</sub> = 1×2<sup>3</sup>+1×2<sup>2</sup>+0×2<sup>1</sup>+1×2<sup>0</sup>= 1310</p><br>
+                <h3>Example: Convert A5 to Binary</h3>
+                <table>
+                    <tr><th>Hexadecimal</th><th>Binary Equivalent</th></tr>
+                    <tr><td>A (10)</td><td>1010</td></tr>
+                    <tr><td>5</td><td>0101</td></tr>
+                </table>
+                <p>Final Binary: <b>10100101</b></p>
+
+            {% elif from_system == "hexadecimal" and to_system == "octal" %}
+                <h2>Hexadecimal to Octal Conversion</h2>
+                <h2>Hexadecimal</h2>
+                <p>Hexadecimal number is a number expressed in the base 16 numeral system. Hexadecimal number's digits have 16 symbols: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Each digit of a hexadecimal number counts a power of 16.<br><br>
+                    Hexadecimal number example:
+                    62C<sub>16</sub> = 6×16<sup>2</sup>+2×16<sup>1</sup>+12×16<sup>0</sup></p>
+                <h2>Octal</h2>
+                <p>Octal number is a number expressed in the base 8 numeral system. Octal number's digits have 8 symbols: 0,1,2,3,4,5,6,7. Each digit of an octal number counts a power of 16.<br><br>
+                    Octal number example:                    
+                    628<sub>8</sub> = 6×8<sup>2</sup>+2×8<sup>1</sup>+7×8<sup>0</sup></p>
+                <h3>Example: Convert 2F to Octal</h3>
+                <p>Convert to binary first: 2F → 0010 1111 → 057 (Octal)</p>
+
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+            <footer>
+                <p>&copy; 2025. @Bereket All rights reserved.</p>
+            </footer>
+    <!-- <script src="{% static 'animate.js' %}"></script> -->
+</body>
+</html>

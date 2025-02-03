@@ -1,0 +1,158 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for everything */
+.container {
+    width: 50%;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+}
+
+/* Headings */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #0056b3;
+}
+
+h2 {
+    font-size: 20px;
+    color: #0056b3;
+    margin-top: 20px;
+}
+
+/* Form section styling */
+.form-section {
+    padding: 15px;
+    background: #eef3f7;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Select and input styling */
+select, input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Button styling */
+.convert-btn, .reset-btn {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.convert-btn {
+    background-color: #007BFF;
+    color: white;
+}
+
+.convert-btn:hover {
+    background-color: #0056b3;
+}
+
+.reset-btn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.reset-btn:hover {
+    background-color: #b52b27;
+}
+
+/* Result section */
+.result-section {
+    padding: 15px;
+    background: #eaf5ea;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Info section */
+.info-section {
+    text-align: left;
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef3f7;
+    border-radius: 5px;
+}
+
+/* Explanation Section */
+.explanation-section {
+    margin-top: 30px;
+    background: #fdf8e1;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.explanation-section h2 {
+    color: #d48806;
+    font-size: 22px;
+}
+
+.explanation-section p, .explanation-section ol {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.explanation-section ol {
+    padding-left: 20px;
+}
+
+.explanation-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.explanation-section table, th, td {
+    border: 1px solid #d48806;
+}
+
+.explanation-section th, .explanation-section td {
+    padding: 10px;
+    text-align: center;
+}
+
+.explanation-section th {
+    background: #ffe58f;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    select, input {
+        width: 100%;
+    }
+}
