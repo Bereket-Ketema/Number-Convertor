@@ -7,5 +7,5 @@ from . import views
 urlpatterns=[
    path('',views.select,name='select'),
    path('numbers',views.numbers,name='numbers'),
-
+   path('api/data/',views.get_data),
     ]

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 # Create your views here.
 def select(request):
     return render(request,'select.html')
@@ -67,7 +66,7 @@ def binary_to_hexadecimal(binary_num):
 def octal_to_decimal(octal_num):
     # Check if the input contains only '0-7'
     if not all(char in '01234567' for char in octal_num):
-        return "Invalid octal number! Please enter only include 0-8 digits."
+        return "Invalid octal number! Please enter only include 0-7 digits."
     return int(octal_num, 8)
 def octal_to_binary(octal_num):
     # Check if the input contains only '0-8'
